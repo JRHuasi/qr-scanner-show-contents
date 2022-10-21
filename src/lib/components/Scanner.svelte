@@ -14,7 +14,7 @@
 	export let result = null; // : string
 	export let stopMediaStream = null;
 	let startMediaStream;
-	let contenido = [];
+	let contenido = "";
 
 	const dispatch = createEventDispatcher();
 
@@ -51,6 +51,7 @@
 				dispatch('successfulScan', texto.texto);
 				video.srcObject = null;
 				result = texto.titulo;
+				contenido = texto.texto;
 			}else{
 				console.log("NO incluye");
 			}
@@ -80,6 +81,7 @@
 
 			// stopMediaStream();
 			// video.srcObject = null;
+			// console.log("AAAAAAAAAAAAAA", qrCode.data)
 			mostrar(qrCode.data);
 		}
 	};
@@ -129,7 +131,7 @@
 </div>
 
 <slot {result} >
-	<Results active={result !== null} decodedData={result} onNewScan={() => (result = null)} />
+	<Results active={result !== null} decodedData={result} {contenido} onNewScan={() => (result = null)} />
 </slot>
 
 <style>

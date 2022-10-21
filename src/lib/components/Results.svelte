@@ -4,6 +4,7 @@
 	export let active: boolean;
 	export let decodedData: string;
 	export let onNewScan: () => void;
+	export let contenido = "";
 
 	let data, regex;
 
@@ -22,7 +23,12 @@
 					{decodedData}
 				</a>
 			{:else if decodedData}
-				{decodedData};
+				<div class="results__title">
+					{decodedData};
+				</div>
+				<div class="results__content">
+					{@html contenido}
+				</div>
 			{/if}
 		</div>
 		<div class="results__button-container">
@@ -63,12 +69,26 @@
 		border: 2px dashed #3d3d3d;
 		border-radius: 20px;
 
-		font-size: 1.1rem;
+		font-size: 1rem;
+		color: black;		
+	}
+	.results__data .results__title{
+		font-weight: 500;
+		text-indent: 0;
+		text-decoration: underline;
+		text-align: center;
+	}
+	.results__data .results__content{
 		text-align: left;
 		text-indent: 15px;
+		font-size: .9em;
 	}
+
+	.results__data .results__content p{
+		margin: -10px !important;
+	}
+
 	.results__empty {
-		color: black;		
 		font-style: italic;
 	}
 

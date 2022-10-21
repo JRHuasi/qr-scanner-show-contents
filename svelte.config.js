@@ -17,7 +17,7 @@ const config = {
 			assets: 'docs'
 		}),
 		paths: {
-			base: dev ? '' : '/qrcode-scanner-svelte'
+			base: dev ? '' : ''
 		}
 	}
 };

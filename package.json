@@ -1,5 +1,5 @@
 {
-	"name": "@peerpiper/qrcode-scanner-svelte",
+	"name": "qrcode-scanner-svelte",
 	"version": "1.0.6",
 	"svelte": "index.js",
 	"main": "index.js",
@@ -31,5 +31,5 @@
 	"dependencies": {
 		"jsqr": "^1.4.0"
 	},
-	"repository": "https://github.com/PeerPiper/qrcode-scanner-svelte"
+	"repository": "https://github.com/JRHuasi/qr-scanner-show-contents"
 }

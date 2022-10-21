@@ -1,4 +1,4 @@
-# PWA QR Code Scanner
+# QR Code Scanner to show contents
 
 QR Code scanner in a Svelte Component
 
