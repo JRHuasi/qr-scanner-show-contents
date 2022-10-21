@@ -15,11 +15,9 @@
 </script>
 
 <slot {decodedData}>
-	<div class="results">
+	<div class="results" class:oculto={!decodedData || decodedData === ''}>
 		<div class="results__data">
-			{#if !decodedData || decodedData === ''}
-				<span class="results__empty">Scan a QR Code to send data here. </span>
-			{:else if decodedData?.match(regex)}
+			{#if decodedData?.match(regex)}
 				<a class="results__link" href={decodedData} target="_blank" rel="noopener noreferrer">
 					{decodedData}
 				</a>
@@ -30,33 +28,47 @@
 		<div class="results__button-container">
 			<button type="button" class="results__button" on:click={onNewScan}>
 				<!-- <img class="results__scan-icon" src={scanIcon} alt="New Scan" /> -->
-				<span>New Scan</span>
+				<span>Nuevo Scan</span>
 			</button>
 		</div>
 	</div>
 </slot>
 
 <style>
+
+	.oculto {
+		display: none;
+	}
 	.results {
-		width: 100%;
+		position: fixed;
+		width: 95%;
+		height: 95%;
 		max-width: 500px;
+		top: 10px;
+		padding: 5px;
+		background-color: rgba(222, 184, 135, .9);
+		z-index: 99;
+		border-radius: 15px;
+
 	}
 
 	.results__data {
-		margin: 50px 0 80px 0;
+		margin: 10px 0 10px 0;
 		padding: 20px 20px 27px 20px;
+		height: 85%;
+		overflow: scroll;
 
 		word-break: break-all;
 
 		border: 2px dashed #3d3d3d;
 		border-radius: 20px;
 
-		font-size: 1.3rem;
+		font-size: 1.1rem;
+		text-align: left;
+		text-indent: 15px;
 	}
-
 	.results__empty {
-		color: #959595;
-
+		color: black;		
 		font-style: italic;
 	}
 
@@ -70,7 +82,7 @@
 
 		align-items: center;
 
-		padding: 14px 16px;
+		padding: 8px 16px;
 
 		cursor: pointer;
 		transition-duration: 300ms;

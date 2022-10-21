@@ -8,6 +8,13 @@
 	let result; // totally optional
 </script>
 
+<svelte:head>
+	<title>Muestra pictórica - TUCMA.COM</title>
+	<meta name="robots" content="noindex nofollow" />
+	<meta name="description" content="El Arte Renacntista en tus manos" />
+	<html lang="en" />
+</svelte:head>
+
 <Header />
 
 <main>

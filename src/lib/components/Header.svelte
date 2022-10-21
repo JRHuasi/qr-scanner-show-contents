@@ -4,10 +4,9 @@
 
 <header>
 	<!-- <img src={logo} width={64} height={64} class="header__logo" alt="logo" /> -->
-
 	<div class="header__text-container">
-		<div class="header__title">QR Scan Browser</div>
-		<div class="header__description">QR Code Scanner in the Browser</div>
+		<div class="header__title">¿De qué se trata?</div>
+		<div class="header__description">Te contamos lo que estás viendo</div>
 	</div>
 </header>
 
@@ -49,7 +48,7 @@
 
 	.header__description {
 		color: #959595;
-
+		text-align: center;
 		font-size: 1rem;
 	}
 </style>

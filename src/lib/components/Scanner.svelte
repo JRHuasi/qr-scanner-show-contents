@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount, createEventDispatcher } from 'svelte';
 	import { stream, error, status } from '../stores.js';
+	import { contenidos } from '../utils/datos';
 
 	import jsQR from 'jsqr';
 
@@ -8,10 +9,12 @@
 	import Results from './Results.svelte';
 
 	import UserMedia from '../utils/use-usermedia.svelte';
+	import { text } from 'svelte/internal';
 
 	export let result = null; // : string
 	export let stopMediaStream = null;
 	let startMediaStream;
+	let contenido = [];
 
 	const dispatch = createEventDispatcher();
 
@@ -26,13 +29,33 @@
 		mounted = true;
 
 		({ stopMediaStream, startMediaStream } = useUserMedia());
-
+		url = window.location.href;
 		return () => {
 			console.log('Component destroyed');
 			stopMediaStream();
 			video.srcObject = null;
 		};
 	});
+
+	let url = ``;
+	// $: elem = url.split("=");
+	// $: console.log("elem",elem[1]);
+	
+	const mostrar = (uri: string) => {
+		if(uri.includes('elem')) {
+				console.log("incluye");
+				const textoID = uri.split("=")[1];
+				const texto = contenidos[textoID];
+				console.log("texto}", contenidos[textoID]);
+				stopMediaStream();
+				dispatch('successfulScan', texto.texto);
+				video.srcObject = null;
+				result = texto.titulo;
+			}else{
+				console.log("NO incluye");
+			}
+	}
+	$: mostrar(url);
 
 	const startCapturing = (): void => {
 		if (!canvas || !video) return;
@@ -52,11 +75,12 @@
 			console.log('timeout');
 			setTimeout(startCapturing, 750);
 		} else {
-			result = qrCode.data;
-			dispatch('successfulScan', qrCode.data);
+			// result = qrCode.data;
+			// dispatch('successfulScan', qrCode.data);
 
-			stopMediaStream();
-			video.srcObject = null;
+			// stopMediaStream();
+			// video.srcObject = null;
+			mostrar(qrCode.data);
 		}
 	};
 
@@ -100,11 +124,11 @@
 	</div>
 
 	<div class="scanner-tip">
-		<div>Scan a QR code with your camera to see what it says.</div>
+		<div>Escaneá el código para ver la descripción</div>
 	</div>
 </div>
 
-<slot {result}>
+<slot {result} >
 	<Results active={result !== null} decodedData={result} onNewScan={() => (result = null)} />
 </slot>
 
